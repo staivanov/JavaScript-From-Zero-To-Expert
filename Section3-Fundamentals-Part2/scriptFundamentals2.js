@@ -7,7 +7,7 @@ function calculateAge(userYearOfBirth) {
 
 const currentAge = calculateAge(1989);
 
-//Function expression
+//Anonymous function
 const currentAgeSecond = function (userYearOfBirth) {
     let age = 2024 - userYearOfBirth;
 
