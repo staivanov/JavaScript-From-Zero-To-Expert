@@ -7,7 +7,7 @@ function calculateAge(userYearOfBirth) {
 
 const currentAge = calculateAge(1989);
 
-//Anonymous function
+//Anonymous function 
 const currentAgeSecond = function (userYearOfBirth) {
     let age = 2024 - userYearOfBirth;
 
@@ -15,3 +15,15 @@ const currentAgeSecond = function (userYearOfBirth) {
 }
 
 console.log(currentAge, currentAgeSecond);
+
+//Arrow function
+const calculateAgeThird = userYearOfBirth => 2024 - userYearOfBirth;
+
+
+//Arrays
+
+let numbers = [2, 3, 4, 5, 6];
+numbers.push(7);
+numbers.unshift(1);
+
+console.log(numbers);
