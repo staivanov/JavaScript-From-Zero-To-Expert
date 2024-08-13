@@ -32,10 +32,13 @@ console.log(numbers);
 const ani = {
     firstName: 'Ani',
     lastName: 'Ivanova',
-    age: 32,
     job: 'seller',
-    friends: ['Mimi', 'Gabi', 'Dari']
+    friends: ['Mimi', 'Gabi', 'Dari'],
+    calcAge: function(yearsOfBirth){
+        return 2024 - yearsOfBirth;
+    }
 };
 
-console.log(ani);
+const ageAni = ani.calcAge(1992);
+console.log(ageAni);
 
