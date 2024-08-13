@@ -27,3 +27,15 @@ numbers.push(7);
 numbers.unshift(1);
 
 console.log(numbers);
+
+//Objects
+const ani = {
+    firstName: 'Ani',
+    lastName: 'Ivanova',
+    age: 32,
+    job: 'seller',
+    friends: ['Mimi', 'Gabi', 'Dari']
+};
+
+console.log(ani);
+
