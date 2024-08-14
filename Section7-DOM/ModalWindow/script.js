@@ -31,6 +31,6 @@ document.addEventListener('keydown', function (e) {
     let isContains = !modal.classList.contains('hidden');
 
     if (e.key === keyName && isContains) {
-       closeModal();
+        closeModal();
     }
 });
