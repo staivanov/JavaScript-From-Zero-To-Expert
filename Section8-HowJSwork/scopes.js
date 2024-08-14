@@ -30,3 +30,15 @@ if (currentAge > 18) {
 else {
     console.log('You can\'t enter in any club.');
 }
+
+function FirstScope() {
+
+    let lastName = 'Lee';
+    console.log(lastName);
+
+    function SecondScope() {
+        const yearOfWedding = 2015;
+        console.log(`Mr. ${me} ${lastName} has wedding back in ${yearOfWedding}`);
+    }
+}
+
