@@ -34,12 +34,12 @@ console.log(newKeywords);
 console.log(books.keywords);
 
 //Rest pattern
-const [a, b, ...other] = [1, 2, 3, 4, 5,6];
+const [a, b, ...other] = [1, 2, 3, 4, 5, 6];
 console.log(a, b, other);
 
 
 //Functions
-const addNumbers = function(...numbers) {
+const addNumbers = function (...numbers) {
 
     let sum = 0;
 
@@ -47,9 +47,21 @@ const addNumbers = function(...numbers) {
         sum += number;
     });
 
-        return sum;
+    return sum;
 };
 
 addNumbers(1);
 addNumbers(2, 3);
 addNumbers(99, 14, 83);
+
+
+//For-of loop
+for (const keyword of books.keywords) {
+    console.log(keyword);
+}
+
+//Optional chaining
+const users = [{ name: 'Jonas', email: 'jonas@gmail.com' }];
+const usersTwo = [{}];
+console.log(users[0].name ?? 'User array is empty.');
+console.log(usersTwo[0].name ?? 'User array is empty.');
