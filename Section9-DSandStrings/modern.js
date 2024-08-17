@@ -65,3 +65,16 @@ const users = [{ name: 'Jonas', email: 'jonas@gmail.com' }];
 const usersTwo = [{}];
 console.log(users[0].name ?? 'User array is empty.');
 console.log(usersTwo[0].name ?? 'User array is empty.');
+
+const bookKeywordKeys = Object.values(books.keywords);
+
+for (let keyword of bookKeywordKeys) {
+    console.log(keyword);
+}
+
+//Sets
+//Unique group of values
+let keywords = new Set(books.keywords);
+console.log(keywords.size);
+console.log(keywords.has('programming'));
+console.log(keywords.has('javascript'));
