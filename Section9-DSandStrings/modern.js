@@ -78,3 +78,15 @@ let keywords = new Set(books.keywords);
 console.log(keywords.size);
 console.log(keywords.has('programming'));
 console.log(keywords.has('javascript'));
+
+
+//Maps
+//The Map object holds key-value pairs and remembers the original insertion order of the keys.
+const book = new Map();
+book.set('name', 'Harry Poter')
+    .set('author', "J. K. Rowling")
+    .set('year', '2001');
+
+console.log(book.get('name'));
+console.log(...book.keys());
+console.log(...book.values());
