@@ -42,3 +42,18 @@ function FirstScope() {
     }
 }
 
+///Variables in window object
+var x = 1;
+let y = 2;
+const z = 3;
+
+console.log(x === window.x);
+console.log(y === window.z);
+console.log(z === window.z);
+
+
+//Primitives vs Objects
+//Primitives are: numbers, strings, boolean, undefined, null, symbol, bigint. They are stored in the Call Stack.
+//Objects are: arrays, functions, object literals, many more..
+
+//In Call Stack where functions are executed and Heap where objectes are stored in memory.
