@@ -90,3 +90,28 @@ book.set('name', 'Harry Poter')
 console.log(book.get('name'));
 console.log(...book.keys());
 console.log(...book.values());
+
+//Working with strings
+const atpMastersParis = 'Rolex Paris Masters';
+const topPlayer = 'Roger Federer';
+console.log(topPlayer[0]);
+
+console.log(atpMastersParis.indexOf('r'));
+console.log(atpMastersParis.lastIndexOf('r'));
+console.log(atpMastersParis.indexOf('Paris'));
+console.log(atpMastersParis.slice(1, 4));
+
+const announcement = 'Hello from JS course zero to hero.';
+console.log(announcement.replace('Hello', 'Hi'));
+
+if (announcement.startsWith('H') && announcement.endsWith('o')) {
+    console.log(announcement);
+}
+
+//Split
+let announcementSplitted = announcement.split(' ');
+console.log(announcementSplitted);
+
+//Repeat
+let message = 'be positive';
+console.log(message.repeat(3));
