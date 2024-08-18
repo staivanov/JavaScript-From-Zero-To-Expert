@@ -29,3 +29,38 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+const displayMovements = function (movements) {
+  movements.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const html = `<div class="movements_row">
+      <div class="movements_type movements__type--deposit">${i + 1}</div>
+      <div class="movements_value"> ${mov}</div>
+      </div>
+      `;
+  });
+
+  containerMovements.insertAdjacentHTML('afterbegin', html);
+};
+
+
+const checkDogs = function (dogsJulia, dogsKate) {
+  const dogsJuliaCorrected = dogsJulia.slice();
+  dogsJuliaCorrected.splice(0, 1);
+  dogsJuliaCorrected.splice(-2);
+  const dogs = dogsJuliaCorrected.concat(dogsKate);
+
+  dogs.forEach(function (dog, i) {
+    if (dog >= 3) {
+      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old.`);
+    } else {
+      console.log(`Dog number ${i + 1} is still a puppy.`);
+    }
+  });
+};
+
+displayMovements(account1.movements);
+console.log(containerMovements.innerHtml = ' ');
+
+//Data transofrmations: map, filter, reduce

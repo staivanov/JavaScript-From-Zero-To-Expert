@@ -32,7 +32,7 @@ for (const [i, movement] of movements.entries()) {
 
 console.log('------FOREEACH------');
 
-movements.forEach(function (movement, index, array) {
+movements.forEach(function (movement, i, array) {
     if (movement > 0) {
         console.log(`Movement ${i} You deposit ${movement}`);
     }
@@ -40,3 +40,11 @@ movements.forEach(function (movement, index, array) {
         console.log(`You withdrew ${Math.abs(movement)}`);
     }
 });
+
+const eurToUsd = 1.1;
+const moventsToUSD = movements.map(function (mov) {
+    return mov * eurToUsd;
+});
+
+console.log(movements);
+console.log(moventsToUSD);
