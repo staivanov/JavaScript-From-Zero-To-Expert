@@ -16,7 +16,6 @@ console.log(lettersTwo.reverse());
 const allLetters = letters.concat(lettersTwo);
 console.log(allLetters);
 
-
 //Join
 console.log(letters.join(' - '));
 
