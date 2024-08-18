@@ -63,3 +63,22 @@ const yourGreeting = greet('Hello', 'Mr. Smith');
 console.log(isPrivate);
 
 (() => console.log('And this will never run again.'))();
+
+//Closure
+let f;
+
+const g = function () {
+    const a = 23;
+    f = function () {
+        console.log(a);
+    }
+};
+
+const h = function () {
+
+    const b = 777;
+
+    f = function() {
+        console.log(b = 2);
+    };
+};
