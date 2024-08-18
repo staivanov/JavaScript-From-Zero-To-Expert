@@ -31,7 +31,7 @@ const upperFirstWord = function (str) {
 };
 
 //Higher-order function
-const transformer = function(str, fn){
+const transformer = function (str, fn) {
 
     console.log(`Original string ${str}`);
     console.log(`Transformed string: ${fn(str)}`);
@@ -41,3 +41,25 @@ const transformer = function(str, fn){
 
 const statementAboutJS = 'JavaScript is one of the best programming language';
 transformer(statementAboutJS, upperFirstWord);
+
+//Function return function
+const greet = function (message, sender) {
+    return function (message, sender) {
+        console.log(`${message} ${sender}`);
+    }
+};
+
+const yourGreeting = greet('Hello', 'Mr. Smith');
+
+//The Call and Apply methods
+
+
+//IIFE
+(function () {
+    console.log('This will never run again.');
+    const isPrivate = 24;
+})();
+
+console.log(isPrivate);
+
+(() => console.log('And this will never run again.'))();
