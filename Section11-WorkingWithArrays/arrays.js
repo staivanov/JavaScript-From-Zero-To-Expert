@@ -48,3 +48,4 @@ const moventsToUSD = movements.map(function (mov) {
 
 console.log(movements);
 console.log(moventsToUSD);
+

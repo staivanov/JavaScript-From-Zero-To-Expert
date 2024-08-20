@@ -215,3 +215,51 @@ movements.sort((a, b) => {
   if (a < b) return 1;
 });
 
+const bankDepositSum = account
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+
+console.log(bankDepositSum);
+
+const sums = account
+  .flatMap(acc => acc.movements)
+  .reduce((sum, cur) => { cur > 0 ? sum.deposit += cur : sums.withdrawal += cur },
+    { deposits: 0, withdrawal: 0 });
+
+//Prefixed operator ++a
+let a = 5;
+console.log(++a);
+console.log(a);
+
+//Postfixed operator a++
+let b = 10;
+console.log(b++);
+console.log(b);
+
+const { depositsV2, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((sums, cur) => {
+    cur > 0 ? sums.deposits += cur : sums.withdrawals += cur;
+  }, { deposits: 0, withdrawal: 0 });
+
+console.log(sumsTwo);
+
+//this is a nice title -> This Is A Nice Title
+
+const convertTitleCase = function (title) {
+
+  const capitalize = str => str[0]
+    .toUpperCase() + str
+      .slice(1);
+
+  const exceptions = ['a', 'an', 'and', 'the',
+    'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title.toLowerCase()
+    .split(' ')
+    .map(word => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+
+  return capitalize(titleCase);
+};
