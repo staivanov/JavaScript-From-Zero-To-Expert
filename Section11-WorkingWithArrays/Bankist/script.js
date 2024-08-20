@@ -30,15 +30,23 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   movements.forEach(function (mov, i) {
-    const type = mov > 0 ? 'deposit' : 'withdrawal';
 
-    const html = `<div class="movements_row">
+    containerMovements.innerHTML = '';
+    const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+    movements.forEach(function (mov, i) {
+      const type = mov > 0 ? 'deposit' : 'withdrawal';
+      const html = `<div class="movements_row">
       <div class="movements_type movements__type--deposit">${i + 1}</div>
       <div class="movements_value"> ${mov}</div>
       </div>
       `;
+    });
+
+
+
   });
 
   containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -87,3 +95,123 @@ console.log(movements);
 
 const withdrawal = movements.filter(mov => mov < 0);
 console.log(withdrawal);
+
+//Accumulator
+const calcPrintBalance = function (movements) {
+
+  const balance = movements.reduce(function (acc, cur) {
+    return acc + cur
+  }, 0);
+
+  labelBalance.textContent = `${balance} euro`;
+};
+
+calcPrintBalance(account1.movements);
+
+const eurTousd = 1.1;
+const totalInUSDdollars = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * eurTousd)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(totalInUSDdollars);
+
+const calcDisplaySummary = function (acc) {
+
+  const incomes = acc.movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumIn.textContent = `${incomes} euros`;
+
+  const out = acc.movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumIn.textContent = `${Math.abs(out)} euro`;
+
+  const interest = acc.movements
+    .filter(mov => mov > 0)
+    .map(deposit => deposit * (acc.interest / 100))
+    .filter((int, i, arr) => {
+      return int >= 1;
+    })
+
+  labelSumInterest.textContent = `${interest} euro`;
+
+};
+
+//Event handler
+let currentAccount;
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+  const currentAccountMovements = currentAccount
+    .movements
+    .some(mov => mov >= amount * 1.1);
+
+  if (amoun > 0 && currentAccountMovements) {
+    currentAccount.movements.push(amount);
+
+    updateUI(currentAccount);
+  }
+
+  inputLoanAmount.value = ' ';
+});
+
+
+
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+  currentAccount = account.find(acc => acc.username === inputLoginUsername.value);
+
+  if (currentAccount.pin === Number(nputLoginPinvalue)) {
+    console.log('LOGIN');
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
+
+    cotainerApp.style.opacity = 100;
+
+    //Clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+
+    inputLoginPin.blur();
+
+    displayMovements(currentAccount.movements);
+    calcPrintBalance(currentAccount.movements);
+    calcDisplaySummary(currentAccount);
+  }
+});
+
+console.log(movements);
+console.log(movements.includes(-130));
+const anyDeposits = movements.some(mov => mov > 1500);
+console.log(anyDeposits);
+
+
+let sorted = false;
+
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+
+  sorted - !sorted;
+});
+
+
+//Every
+console.log(movements.every(mov => mov > 0));
+
+//Sorting asc
+movements.sort((a, b) => {
+  if (a > b) return 1;
+  if (a < b) return -1;
+});
+
+//Sorting desc
+movements.sort((a, b) => {
+  if (a > b) return -1;
+  if (a < b) return 1;
+});
+
