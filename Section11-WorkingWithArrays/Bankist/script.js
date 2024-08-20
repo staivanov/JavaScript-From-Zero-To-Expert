@@ -147,7 +147,7 @@ let currentAccount;
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  const amount = Math.floor(inputLoanAmount.value);
   const currentAccountMovements = currentAccount
     .movements
     .some(mov => mov >= amount * 1.1);
