@@ -34,19 +34,30 @@ const displayMovements = function (movements, sort = false) {
   movements.forEach(function (mov, i) {
 
     containerMovements.innerHTML = '';
-    const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+    const movs = sort ? movements.slice().sort((a, b) => a - b) : acc.movements;
 
-    movements.forEach(function (mov, i) {
+    movs.forEach(function (mov, i) {
+
       const type = mov > 0 ? 'deposit' : 'withdrawal';
+      const date = new Date(acc.moventsDates[i]);
+
+      const now = new Date();
+      const day = `${date.getDate()}`;
+      const month = `${date.getMonth()}`;
+      const year = date.getFullYear();
+      const hour = now.getHours();
+      const min = now.getMinutes();
+
+      const fullDate = `${day}/${month}/${year}${hour}:${min}`;
+      labelDate.textContent = fullDate;
+
+
       const html = `<div class="movements_row">
       <div class="movements_type movements__type--deposit">${i + 1}</div>
       <div class="movements_value"> ${mov}</div>
       </div>
       `;
     });
-
-
-
   });
 
   containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -141,8 +152,6 @@ const calcDisplaySummary = function (acc) {
 
 };
 
-//Event handler
-let currentAccount;
 
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
@@ -162,6 +171,12 @@ btnLoan.addEventListener('click', function (e) {
 });
 
 
+//Event handlers
+let currentAccount;
+
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 100;
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
@@ -263,3 +278,27 @@ const convertTitleCase = function (title) {
 
   return capitalize(titleCase);
 };
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = +inputTransferAmount.value;
+  const receiveAcc = account.find(username.value === inputTransferTo.value);
+  inputTransferAmount.value = inputTransferTo.value = '';
+
+  let isAmountPossitive = amount > 0;
+  let isCurrentAccountBalanceGreater = currentAccount.balance >= amount;
+  let isCurrentAccountValid = currentAccount.username !== receiveAcc?.username;
+
+  if (isAmountPossitive && isCurrentAccountBalanceGreater && isCurrentAccountValid) {
+    //Actual transfer
+    currentAccount.movements.push(-amount);
+    receiveAcc.movements.push(amount);
+
+    //Adding transfer date
+    currentAccount.moventsDates.push(new Date());
+
+    updateUI(currentAccount);
+  }
+
+  inputLoanAmount.value = '';
+});
