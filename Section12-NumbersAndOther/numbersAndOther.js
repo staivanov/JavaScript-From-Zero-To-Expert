@@ -46,12 +46,19 @@ console.log(future.getFullYear());
 console.log(future.getMonth());
 console.log(future.getDay());
 console.log(future.getHours());
-
 console.log(+future);
-const calculateDaysPassed = Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
-const currentDate = new Date(2024, 8, 20);
-const somewhereInTime = new Date(2024, 8, 15);
-const daysPassed = calculateDaysPassed(currentDate, somewhereInTime);
-console.log(daysPassed);
 
+//Custom format
+const num = 384365.23;
 
+const options = {
+    style: 'unit',
+    unit: 'celsius',
+    currency: 'EUR'
+};
+
+const germany = 'Germany';
+const usa = 'US';
+
+console.log(usa, new Intl.NumberFormat('en-US', options).format(num));
+console.log(germany, new Intl.NumberFormat('de-DE', options).format(num));

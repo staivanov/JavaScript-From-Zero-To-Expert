@@ -30,7 +30,7 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-function formatMovementDate(date) {
+function formatMovementDate(date, local) {
 
   const calculateDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
@@ -48,8 +48,19 @@ function formatMovementDate(date) {
   const year = date.getFullYear();
   const fullDate = `${day}/${month}/${year}`;
 
-  return fullDate;
+  return new Intl.DateTimeFormat(local).format(date);
 }
+
+
+
+const formatCurrency = function (value, locale, currency) {
+
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: 'currency'
+  }).format(value);
+
+};
 
 const displayMovements = function (movements, sort = false) {
   movements.forEach(function (mov, i) {
@@ -61,14 +72,23 @@ const displayMovements = function (movements, sort = false) {
 
       const type = mov > 0 ? 'deposit' : 'withdrawal';
       const date = new Date(acc.moventsDates[i]);
-      const displayDate = formatMovementDate(date);
+      const displayDate = formatMovementDate(date, acc.local);
+
+      const formattedMov = formatCurrency(mov, acc.locale, acc.currency);
+
+
+
+
+
 
       const fullDate = `${day}/${month}/${year}${hour}:${min}`;
       labelDate.textContent = fullDate;
 
       const html = `<div class="movements_row">
-      <div class="movements_type movements__type--deposit">${displayDate}</div>
-      <div class="movements_value"> ${mov.toFixed(2)}</div>
+          <div class="movements_type movements__type--${type}">${i + 1} ${type}</div>
+          <div class="movements_date">${displayDate}</div>
+          <div class="movements__value> ${formatMovementDate} </div>
+          <div class="movements_value"> ${mov.toFixed(2)}</div>
       </div>
       `;
     });
@@ -133,6 +153,12 @@ const calcPrintBalance = function (movements) {
 
 calcPrintBalance(account1.movements);
 
+const calcDisplayBalance = function (acc) {
+
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  const formattedMov = formatCurrency(acc.balance, acc.locale, acc.currency);
+};
+
 const eurTousd = 1.1;
 const totalInUSDdollars = movements
   .filter(mov => mov > 0)
@@ -147,7 +173,7 @@ const calcDisplaySummary = function (acc) {
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
 
-  labelSumIn.textContent = `${incomes} euros`;
+  labelSumIn.textContent = formatCurrency(incomes, acc.locale, acc.currency);
 
   const out = acc.movements
     .filter(mov => mov < 0)
@@ -162,7 +188,7 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
 
-  labelSumInterest.textContent = `${interest} euro`;
+  labelSumInterest.textContent = `${interest.toFixed(2)} euro`;
 
 };
 
@@ -316,3 +342,34 @@ btnTransfer.addEventListener('click', function (e) {
 
   inputLoanAmount.value = '';
 });
+
+const startLogOutTimer = function() {
+
+  
+
+
+};
+
+
+//Experimenting API
+const now = new Date();
+
+const options = {
+  hour: 'numeric',
+  minute: 'numeric',
+  day: 'numeric',
+  month: 'numeric',
+  year: 'numeric',
+  weekday: 'long'
+};
+
+labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, options)
+  .format(now);
+
+setTimeout(() => console.log('Here is your pizza.'), 3000);
+
+//setInterval
+setInterval(function () {
+  const now = new Date();
+  console.log(now)
+}, 1000);
