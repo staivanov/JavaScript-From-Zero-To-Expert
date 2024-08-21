@@ -47,5 +47,11 @@ console.log(future.getMonth());
 console.log(future.getDay());
 console.log(future.getHours());
 
+console.log(+future);
+const calculateDaysPassed = Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+const currentDate = new Date(2024, 8, 20);
+const somewhereInTime = new Date(2024, 8, 15);
+const daysPassed = calculateDaysPassed(currentDate, somewhereInTime);
+console.log(daysPassed);
 
 

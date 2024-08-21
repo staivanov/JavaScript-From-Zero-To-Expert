@@ -30,6 +30,27 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+function formatMovementDate(date) {
+
+  const calculateDaysPassed = (date1, date2) =>
+    Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+
+  const daysPassed = calculateDaysPassed(new Date(), date);
+  console.log(daysPassed);
+
+
+  if (daysPassed === 0) return 'Today';
+  if (daysPassed === 1) return 'Yesterday';
+  if (daysPassed <= 7) return `${daysPassed} days agp`;
+
+  const day = `${date.getDate()}`.patStart(2, 0);
+  const month = `${date.getMonth() + 1}`.padStart(2, 0);
+  const year = date.getFullYear();
+  const fullDate = `${day}/${month}/${year}`;
+
+  return fullDate;
+}
+
 const displayMovements = function (movements, sort = false) {
   movements.forEach(function (mov, i) {
 
@@ -40,21 +61,14 @@ const displayMovements = function (movements, sort = false) {
 
       const type = mov > 0 ? 'deposit' : 'withdrawal';
       const date = new Date(acc.moventsDates[i]);
-
-      const now = new Date();
-      const day = `${date.getDate()}`;
-      const month = `${date.getMonth()}`;
-      const year = date.getFullYear();
-      const hour = now.getHours();
-      const min = now.getMinutes();
+      const displayDate = formatMovementDate(date);
 
       const fullDate = `${day}/${month}/${year}${hour}:${min}`;
       labelDate.textContent = fullDate;
 
-
       const html = `<div class="movements_row">
-      <div class="movements_type movements__type--deposit">${i + 1}</div>
-      <div class="movements_value"> ${mov}</div>
+      <div class="movements_type movements__type--deposit">${displayDate}</div>
+      <div class="movements_value"> ${mov.toFixed(2)}</div>
       </div>
       `;
     });
