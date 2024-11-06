@@ -16,12 +16,12 @@ document.querySelector('.check').addEventListener('click', function () {
         document.querySelector('.message').textContent = 'Correct number.';
         document.querySelector('.number').textContent = number;
         if (score > highscore) {
-            highscore = score;3
+            highscore = score; 3
             document.querySelector('.highscore').textContent = highscore;
-        } 
-    } 
-    else if(guess !== number) {
-        if(score > 1){
+        }
+    }
+    else if (guess !== number) {
+        if (score > 1) {
             document.querySelector('.message').textContent = guess > number ? 'Too high' : 'Too low';
             score--;
             document.querySelector('.score').textContent = score;
